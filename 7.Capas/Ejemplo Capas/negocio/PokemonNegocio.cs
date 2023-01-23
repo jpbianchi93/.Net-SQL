@@ -33,7 +33,15 @@ namespace negocio
                     aux.Numero = lector.GetInt32(0);
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
-                    aux.UrlImagen = (string)lector["UrlImagen"];
+
+                    //Validar lectura Null
+                    //método 1
+                    //if(!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
+                    //método 2
+                    if (!(lector["UrlImagen"] is DBNull))
+                        aux.UrlImagen = (string)lector["UrlImagen"];
+
+
                     aux.Tipo = new Elemento();
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
                     aux.Debilidad = new Elemento();
@@ -59,7 +67,10 @@ namespace negocio
             try
             {
                 //setear consulta
-                dato.setearConsulta("insert into POKEMONS (Numero,Nombre,Descripcion,Activo) values(" + nuevo.Numero + ",'" + nuevo.Nombre + "','" + nuevo.Descripcion + "',1)");
+                dato.setearConsulta("insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad) values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', 1, @IdTipo, @IdDebidad)");
+                //setear consulta
+                dato.setearParametro("@IdTipo", nuevo.Tipo.Id);
+                dato.setearParametro("@IdDebilidad", nuevo.Debilidad.Id);
                 //ejecucion de tipo no consulta
                 dato.ejecutarAccion();
             }

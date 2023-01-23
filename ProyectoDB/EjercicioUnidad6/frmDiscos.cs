@@ -24,9 +24,18 @@ namespace winform_app
         private void frmDiscos_Load(object sender, EventArgs e)
         {
             DiscosNegocio acceso = new DiscosNegocio();
-            listaDiscos = acceso.listar();
-            dgvDiscos.DataSource = listaDiscos;
-            dgvDiscos.Columns["UrlImagenTapa"].Visible = false;
+            try
+            {
+                listaDiscos = acceso.listar();
+                dgvDiscos.DataSource = listaDiscos;
+                dgvDiscos.Columns["UrlImagenTapa"].Visible = false;
+                cargarImagen(listaDiscos[0].UrlImagenTapa);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

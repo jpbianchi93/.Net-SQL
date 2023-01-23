@@ -71,6 +71,13 @@ namespace negocio
             }
         }
 
+        //método para setear parámetros
+        public void setearParametro(string nombre, object valor)
+        {
+            //agregar parámetro con valor
+            comando.Parameters.AddWithValue(nombre, valor);
+        }
+
         //funcion de cerrar conexion
         public void cerrarConexion()
         {

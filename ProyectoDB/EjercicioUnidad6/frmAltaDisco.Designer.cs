@@ -72,6 +72,7 @@
             // txtTitulo
             // 
             this.txtTitulo.Location = new System.Drawing.Point(157, 16);
+            this.txtTitulo.MaxLength = 100;
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(121, 20);
             this.txtTitulo.TabIndex = 3;
@@ -79,6 +80,7 @@
             // txtCantidadCanciones
             // 
             this.txtCantidadCanciones.Location = new System.Drawing.Point(157, 69);
+            this.txtCantidadCanciones.MaxLength = 3;
             this.txtCantidadCanciones.Name = "txtCantidadCanciones";
             this.txtCantidadCanciones.Size = new System.Drawing.Size(38, 20);
             this.txtCantidadCanciones.TabIndex = 4;

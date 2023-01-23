@@ -29,7 +29,8 @@ namespace negocio
                     aux.Titulo = (string)datos.Lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
-                    aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
+                    if (!(datos.Lector["UrlImagenTapa"] is DBNull))
+                        aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
                     aux.Estilo = new Estilo();
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
                     aux.Tipo = new TipoEdicion();
@@ -54,7 +55,9 @@ namespace negocio
             AccesoDatos dato = new AccesoDatos();
             try
             {
-                dato.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones) values ('" + nuevo.Titulo + "','" + nuevo.FechaLanzamiento + "','" + nuevo.CantidadCanciones + "')");
+                dato.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion) values ('" + nuevo.Titulo + "', '" + nuevo.FechaLanzamiento + "', '" + nuevo.CantidadCanciones + "', @IdEstilo, @IdTipoEdicion)");
+                dato.setearParametro("@IdEstilo", nuevo.Estilo.Id);
+                dato.setearParametro("@IdTipoEdicion", nuevo.Tipo.Id);
                 dato.ejecutarAccion();
             }
             catch (Exception ex)
