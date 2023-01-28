@@ -15,9 +15,16 @@ namespace EjercicioUnidad6
 {
     public partial class frmAltaDisco : Form
     {
+        private Discos discos = null;
         public frmAltaDisco()
         {
             InitializeComponent();
+        }
+        public frmAltaDisco(Discos discos)
+        {
+            InitializeComponent();
+            this.discos = discos;
+            Text = "Modificar disco";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -27,18 +34,29 @@ namespace EjercicioUnidad6
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Discos discoNuevo = new Discos();
             DiscosNegocio negocio = new DiscosNegocio();
             try
             {
-                discoNuevo.Titulo = txtTitulo.Text;
-                discoNuevo.FechaLanzamiento = DateTime.Parse(dtpFechaLanzamiento.Value.ToString());
-                discoNuevo.CantidadCanciones = int.Parse(txtCantidadCanciones.Text);
-                discoNuevo.Estilo = (Estilo)cboEstilo.SelectedItem;
-                discoNuevo.Tipo = (TipoEdicion)cboTipoEdicion.SelectedItem;
+                if(discos == null)
+                    discos = new Discos();
 
-                negocio.Agregar(discoNuevo);
+                discos.Titulo = txtTitulo.Text;
+                discos.FechaLanzamiento = DateTime.Parse(dtpFechaLanzamiento.Value.ToString());
+                discos.CantidadCanciones = int.Parse(txtCantidadCanciones.Text);
+                discos.UrlImagenTapa = txtUrlImagenTapa.Text;
+                discos.Estilo = (Estilo)cboEstilo.SelectedItem;
+                discos.Tipo = (TipoEdicion)cboTipoEdicion.SelectedItem;
+
+                if (discos.Id != 0)
+                {
+                    negocio.Modificar(discos);
+                    MessageBox.Show("Disco modificado a la lista");
+                }
+                else
+                {
+                negocio.Agregar(discos);
                 MessageBox.Show("Disco agregado a la lista");
+                }
                 Close();
             }
             catch (Exception ex)
@@ -55,7 +73,23 @@ namespace EjercicioUnidad6
             try
             {
                 cboEstilo.DataSource = estilo.listar();
+                cboEstilo.ValueMember = "Id";
+                cboEstilo.DisplayMember = "Descripcion";
                 cboTipoEdicion.DataSource = tipo.listar();
+                cboTipoEdicion.ValueMember = "Id";
+                cboTipoEdicion.DisplayMember = "Descripcion";
+
+                if(discos != null)
+                {
+                    txtTitulo.Text = discos.Titulo;
+                    dtpFechaLanzamiento.Text = discos.FechaLanzamiento.ToString();
+                    txtCantidadCanciones.Text = discos.CantidadCanciones.ToString();
+                    txtUrlImagenTapa.Text = discos.UrlImagenTapa;
+                    cargarImagen(discos.UrlImagenTapa);
+                    cboEstilo.SelectedValue = discos.Estilo.Id;
+                    cboTipoEdicion.SelectedValue = discos.Tipo.Id;
+
+                }
             }
             catch (Exception ex)
             {
@@ -68,6 +102,25 @@ namespace EjercicioUnidad6
         {
             if ((e.KeyChar < 48 || e.KeyChar > 59) && e.KeyChar != 8)
                 e.Handled = true;
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxUrlImagenTapa.Load(imagen);
+
+            }
+            catch (Exception)
+            {
+                //Carga imagen por defecto
+                pbxUrlImagenTapa.Load("https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg");
+            }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrlImagenTapa.Text);
         }
     }
 }

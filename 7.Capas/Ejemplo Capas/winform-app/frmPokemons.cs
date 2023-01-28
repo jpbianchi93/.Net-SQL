@@ -23,6 +23,12 @@ namespace winform_app
 
         private void frmPokemons_Load(object sender, EventArgs e)
         {
+            cargar();
+        }
+
+        //metodo para cargar datos
+        private void cargar()
+        {
             PokemonNegocio negocio = new PokemonNegocio();
             try
             {
@@ -62,6 +68,8 @@ namespace winform_app
             //abrir frmAltaPokemon
             frmAltaPokemon alta = new frmAltaPokemon();
             alta.ShowDialog(); //no te permite salir de la aplicación mientras se trabaja en una ventana
+            //actualizar la carga
+            cargar();
         }
     }
 }

@@ -36,6 +36,7 @@ namespace winform_app
                 pokeNuevo.Numero = int.Parse(txtNumero.Text);
                 pokeNuevo.Nombre = txtNombre.Text;
                 pokeNuevo.Descripcion = txtDescripcion.Text;
+                pokeNuevo.UrlImagen = txtUrlImagen.Text;
                 pokeNuevo.Tipo = (Elemento)cboTipo.SelectedItem;
                 pokeNuevo.Debilidad = (Elemento)cboDebilidad.SelectedItem;
 
@@ -64,6 +65,24 @@ namespace winform_app
             {
 
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrlImagen.Text);
+        }
+        
+        //Carga de imagen de alta con leave
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                pbxAltaPokemon.Load(txtUrlImagen.Text);
+            }
+            catch (Exception ex)
+            {
+                pbxAltaPokemon.Load("https://efectocolibri.com/wp-content/uploads/2021/01/placeholder.png");
             }
         }
     }

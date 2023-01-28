@@ -8,6 +8,8 @@ using System.ComponentModel;
 using dominio;
 using Negocio;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 
 namespace negocio
 {
@@ -20,20 +22,23 @@ namespace negocio
             
             try
             {
-                datos.setearConsulta("select D.Titulo, D.FechaLanzamiento, D.CantidadCanciones, D.UrlImagenTapa, E.Descripcion Estilo, T.Descripcion Tipo from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo = E.Id AND D.IdTipoEdicion = T.Id");
+                datos.setearConsulta("select D.Id, D.IdEstilo, D.IdTipoEdicion, D.Titulo, D.FechaLanzamiento, D.CantidadCanciones, D.UrlImagenTapa, E.Descripcion Estilo, T.Descripcion Tipo from DISCOS D, ESTILOS E, TIPOSEDICION T where D.IdEstilo = E.Id AND D.IdTipoEdicion = T.Id");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Discos aux = new Discos();
+                    aux.Id = (int)datos.Lector["Id"];
                     aux.Titulo = (string)datos.Lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
                     if (!(datos.Lector["UrlImagenTapa"] is DBNull))
                         aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
                     aux.Estilo = new Estilo();
+                    aux.Estilo.Id = (int)datos.Lector["IdEstilo"];
                     aux.Estilo.Descripcion = (string)datos.Lector["Estilo"];
                     aux.Tipo = new TipoEdicion();
+                    aux.Tipo.Id = (int)datos.Lector["IdTipoEdicion"];
                     aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
 
                     lista.Add(aux);
@@ -55,7 +60,8 @@ namespace negocio
             AccesoDatos dato = new AccesoDatos();
             try
             {
-                dato.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, IdEstilo, IdTipoEdicion) values ('" + nuevo.Titulo + "', '" + nuevo.FechaLanzamiento + "', '" + nuevo.CantidadCanciones + "', @IdEstilo, @IdTipoEdicion)");
+                dato.setearConsulta("insert into DISCOS (Titulo, FechaLanzamiento, CantidadCanciones, UrlimagenTapa, IdEstilo, IdTipoEdicion) values ('" + nuevo.Titulo + "', '" + nuevo.FechaLanzamiento + "', '" + nuevo.CantidadCanciones + "', @urlImagenTapa, @IdEstilo, @IdTipoEdicion)");
+                dato.setearParametro("@urlImagenTapa", nuevo.UrlImagenTapa);
                 dato.setearParametro("@IdEstilo", nuevo.Estilo.Id);
                 dato.setearParametro("@IdTipoEdicion", nuevo.Tipo.Id);
                 dato.ejecutarAccion();
@@ -67,6 +73,48 @@ namespace negocio
             finally
             {
                 dato.cerrarConexion();
+            }
+        }
+
+        public void Modificar(Discos disco)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update DISCOS set Titulo = @titulo , FechaLanzamiento = @fecha, CantidadCanciones = @cantidad, UrlImagenTapa = @url, IdEstilo = @idEstilo, IdTipoEdicion = @idTipo where Id = @id");
+                datos.setearParametro("@titulo", disco.Titulo);
+                datos.setearParametro("@fecha", disco.FechaLanzamiento);
+                datos.setearParametro("@cantidad", disco.CantidadCanciones);
+                datos.setearParametro("@url", disco.UrlImagenTapa);
+                datos.setearParametro("@idEstilo", disco.Estilo.Id);
+                datos.setearParametro("@idTipo", disco.Tipo.Id);
+                datos.setearParametro("@id", disco.Id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void Eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("delete from discos where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

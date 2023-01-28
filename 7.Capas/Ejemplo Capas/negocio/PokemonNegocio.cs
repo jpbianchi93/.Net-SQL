@@ -21,7 +21,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad";
+                comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad order by Numero";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -37,10 +37,10 @@ namespace negocio
                     //Validar lectura Null
                     //método 1
                     //if(!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
+                    //    aux.UrlImagen = (string)lector["UrlImagen"];
                     //método 2
                     if (!(lector["UrlImagen"] is DBNull))
                         aux.UrlImagen = (string)lector["UrlImagen"];
-
 
                     aux.Tipo = new Elemento();
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
@@ -67,10 +67,11 @@ namespace negocio
             try
             {
                 //setear consulta
-                dato.setearConsulta("insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad) values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', 1, @IdTipo, @IdDebidad)");
+                dato.setearConsulta("insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad, UrlImagen) values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', 1, @IdTipo, @IdDebilidad, @urlImagen)");
                 //setear consulta
                 dato.setearParametro("@IdTipo", nuevo.Tipo.Id);
                 dato.setearParametro("@IdDebilidad", nuevo.Debilidad.Id);
+                dato.setearParametro("@urlImagen", nuevo.UrlImagen);
                 //ejecucion de tipo no consulta
                 dato.ejecutarAccion();
             }

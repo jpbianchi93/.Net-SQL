@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//Annotations
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    //Hacer visible la clase para que la vea Winform-app (public)
     public class Pokemon
     {
-        //Annotatons
+        public int Id { get; set; }
         [DisplayName("Número")]
         public int Numero { get; set; }
         public string Nombre { get; set; }
