@@ -23,6 +23,7 @@ namespace negocio
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
                 //Modificar.5 - Agregar los Id de tipo y debilidad
+                //EliminarLogico.3 - Ocultar activo = 0
                 comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad And P.Activo = 1";
                 comando.Connection = conexion;
 
@@ -213,6 +214,7 @@ namespace negocio
             }
         }
 
+        //EliminarLogico.1 creacion de metodo
         public void eliminarLogico(int id)
         {
             try

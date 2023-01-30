@@ -127,7 +127,6 @@ namespace winform_app
             this.txtFiltro.Size = new System.Drawing.Size(185, 20);
             this.txtFiltro.TabIndex = 7;
             this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
-            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
             // btnFiltro
             // 

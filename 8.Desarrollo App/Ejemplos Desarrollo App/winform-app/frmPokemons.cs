@@ -95,26 +95,27 @@ namespace winform_app
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            //EliminarFisico.2 llamar metodo
-            PokemonNegocio negocio = new PokemonNegocio();
-            Pokemon seleccionado;
-            //EliminarFisico.2.1 cuadro de dialogo de advertencia
-            DialogResult respuesta = MessageBox.Show("¿De verdad querés eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (respuesta == DialogResult.Yes)
-            {
-                seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-                negocio.eliminar(seleccionado.Id);
-
-            }
-            cargar();
-            //eliminar();
+            ////EliminarFisico.2 llamar metodo
+            //PokemonNegocio negocio = new PokemonNegocio();
+            //Pokemon seleccionado;
+            ////EliminarFisico.2.1 cuadro de dialogo de advertencia
+            //DialogResult respuesta = MessageBox.Show("¿De verdad querés eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //if (respuesta == DialogResult.Yes)
+            //{
+            //    seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            //    negocio.eliminar(seleccionado.Id);
+            //}
+            //cargar();
+            eliminar();
         }
 
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
+            //EliminacionLogico.2
             eliminar(true);
         }
 
+        //Eliminación Fisico y Logico.2 Metodo de seleccion
         private void eliminar(bool logico = false)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -127,6 +128,7 @@ namespace winform_app
                     seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
 
                     if (logico)
+                        //Eliminación logica
                         negocio.eliminarLogico(seleccionado.Id);
                     else
                         //Eliminación fisica
@@ -202,11 +204,7 @@ namespace winform_app
 
         }
 
-        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-           
-        }
-
+        //FiltroRapido.1
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             List<Pokemon> listaFiltrada;
