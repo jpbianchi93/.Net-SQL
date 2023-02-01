@@ -23,6 +23,7 @@ namespace winform_app
         private void frmPokemons_Load(object sender, EventArgs e)
         {
             cargar();
+            //FiltradoAvanzado.1 - enumera el campo
             cboCampo.Items.Add("Número");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Descripción");
@@ -143,6 +144,7 @@ namespace winform_app
             }
         }
 
+        //FiltradoAvanzado.3.2
         private bool validarFiltro()
         {
             if(cboCampo.SelectedIndex < 0)
@@ -183,6 +185,7 @@ namespace winform_app
             return true;
         }
 
+        //FiltradoAvanzado.3
         private void btnFiltro_Click(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -226,6 +229,8 @@ namespace winform_app
 
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //FiltradoAvanzado.2 valor de cbo
+            //guardar elemento seleccionado
             string opcion = cboCampo.SelectedItem.ToString();
             if(opcion == "Número")
             {

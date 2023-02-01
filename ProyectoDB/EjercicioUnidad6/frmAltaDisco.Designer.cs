@@ -43,6 +43,7 @@
             this.pbxUrlImagenTapa = new System.Windows.Forms.PictureBox();
             this.txtUrlImagenTapa = new System.Windows.Forms.TextBox();
             this.lblUrlImagenTaoa = new System.Windows.Forms.Label();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxUrlImagenTapa)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             // 
             // pbxUrlImagenTapa
             // 
-            this.pbxUrlImagenTapa.Location = new System.Drawing.Point(284, 16);
+            this.pbxUrlImagenTapa.Location = new System.Drawing.Point(314, 16);
             this.pbxUrlImagenTapa.Name = "pbxUrlImagenTapa";
             this.pbxUrlImagenTapa.Size = new System.Drawing.Size(200, 200);
             this.pbxUrlImagenTapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -170,7 +171,7 @@
             this.txtUrlImagenTapa.Name = "txtUrlImagenTapa";
             this.txtUrlImagenTapa.Size = new System.Drawing.Size(121, 20);
             this.txtUrlImagenTapa.TabIndex = 1;
-            this.txtUrlImagenTapa.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txtUrlImagenTapa.Leave += new System.EventHandler(this.txtUrlImagenTapa_Leave);
             // 
             // lblUrlImagenTaoa
             // 
@@ -181,11 +182,22 @@
             this.lblUrlImagenTaoa.TabIndex = 13;
             this.lblUrlImagenTaoa.Text = "Tapa de disco";
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(284, 42);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(24, 20);
+            this.btnAgregarImagen.TabIndex = 14;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // frmAltaDisco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 241);
+            this.ClientSize = new System.Drawing.Size(532, 241);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.txtUrlImagenTapa);
             this.Controls.Add(this.lblUrlImagenTaoa);
             this.Controls.Add(this.pbxUrlImagenTapa);
@@ -203,7 +215,6 @@
             this.Controls.Add(this.lblTitulo);
             this.Location = new System.Drawing.Point(520, 280);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(520, 280);
             this.MinimizeBox = false;
             this.Name = "frmAltaDisco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -232,5 +243,6 @@
         private System.Windows.Forms.PictureBox pbxUrlImagenTapa;
         private System.Windows.Forms.TextBox txtUrlImagenTapa;
         private System.Windows.Forms.Label lblUrlImagenTaoa;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }

@@ -10,12 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using System.IO;
 
 namespace EjercicioUnidad6
 {
     public partial class frmAltaDisco : Form
     {
         private Discos discos = null;
+        private OpenFileDialog archivo = null;
         public frmAltaDisco()
         {
             InitializeComponent();
@@ -57,6 +60,10 @@ namespace EjercicioUnidad6
                 negocio.Agregar(discos);
                 MessageBox.Show("Disco agregado a la lista");
                 }
+                
+                if (archivo != null && !(txtUrlImagenTapa.Text.ToUpper().Contains("HTTP")))
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
+                
                 Close();
             }
             catch (Exception ex)
@@ -118,9 +125,21 @@ namespace EjercicioUnidad6
             }
         }
 
-        private void textBox1_Leave(object sender, EventArgs e)
+        private void txtUrlImagenTapa_Leave(object sender, EventArgs e)
         {
             cargarImagen(txtUrlImagenTapa.Text);
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            archivo.ShowDialog();
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                txtUrlImagenTapa.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+            }
         }
     }
 }

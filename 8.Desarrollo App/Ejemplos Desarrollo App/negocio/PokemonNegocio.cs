@@ -114,6 +114,7 @@ namespace negocio
             }
         }
 
+        //FiltradoAvanzado.3.1
         public List<Pokemon> filtrar(string campo, string criterio, string filtro)
         {
             List<Pokemon> lista = new List<Pokemon>();

@@ -131,13 +131,17 @@ namespace winform_app
             }
         }
 
+        //LevantarYGuardarImagenLocal.1
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
             archivo = new OpenFileDialog();
+            //tipo de archivo
             archivo.Filter = "jpg|*.jpg;|png|*.png";
             if(archivo.ShowDialog() == DialogResult.OK)
             {
+                //nombre del archivo
                 txtUrlImagen.Text = archivo.FileName;
+                //carga de imagen
                 cargarImagen(archivo.FileName);
 
                 //guardo la imagen
