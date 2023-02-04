@@ -145,8 +145,10 @@ namespace winform_app
         }
 
         //FiltradoAvanzado.3.2
+        //RequeridosYSoloNros.1 funcion de filtrado
         private bool validarFiltro()
         {
+            //campo está vacio
             if(cboCampo.SelectedIndex < 0)
             {
                 MessageBox.Show("Por favor, seleccione el campo para filtrar.");
@@ -164,6 +166,7 @@ namespace winform_app
                     MessageBox.Show("Debes cargar el filtro para numéricos...");
                     return true;
                 }
+                //campo tiene números
                 if (!(soloNumeros(txtFiltroAvanzado.Text)))
                 {
                     MessageBox.Show("Solo nros para filtrar por un campo numérico...");
@@ -175,6 +178,7 @@ namespace winform_app
             return false;
         }
 
+        //RequeridosYSoloNros.2 funcion numerica
         private bool soloNumeros(string cadena)
         {
             foreach (char caracter in cadena)
@@ -191,6 +195,7 @@ namespace winform_app
             PokemonNegocio negocio = new PokemonNegocio();
             try
             {
+                //RequeridosYSoloNros.1.1 sirve para cancelar el evento
                 if (validarFiltro())
                     return;
 

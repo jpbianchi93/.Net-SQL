@@ -28,6 +28,7 @@ namespace winform_app
             cboCampo.Items.Add("Cantidad de canciones");
             cboCampo.Items.Add("Estilo");
             cboCampo.Items.Add("Tipo de edición");
+
         }
 
         private void cargar()
@@ -184,7 +185,7 @@ namespace winform_app
                 }
                 if (!(soloNumeros(txtFiltro.Text)))
                 {
-                    MessageBox.Show("Solo nros para filtrar por un campo numérico...");
+                    MessageBox.Show("Solo números para filtrar por un campo numérico...");
                     return true;
                 }
 
@@ -216,14 +217,13 @@ namespace winform_app
                                                     x.FechaLanzamiento.ToString().Contains(filtro) ||
                                                     x.Estilo.Descripcion.ToUpper().Contains(filtro.ToUpper()) ||
                                                     x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
-
             }
             else
             {
                 //resetar lista original
                 listaFiltrada = listaDiscos;
             }
-
+            
             dgvDiscos.DataSource = null;
             dgvDiscos.DataSource = listaFiltrada;
             ocultarColumnas();

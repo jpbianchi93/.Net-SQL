@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+//LevantarYGuardarImagenLocal.1.1 - <appSettings> en App.config
 using System.Configuration;
 
 namespace winform_app
@@ -18,6 +19,7 @@ namespace winform_app
     {
         //Modificar.3 - Aributo privado Pokemon = Null
         private Pokemon pokemon = null;
+        //LevantarYGuardarImagenLocal.2
         private OpenFileDialog archivo = null;
 
         public frmAltaPokemon()
@@ -66,8 +68,8 @@ namespace winform_app
                     MessageBox.Show("Agregado exitosamente");
                 }
 
-                //Guardo imagen si la levantó localmente:
-                if(archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
+                //LevantarYGuardarImagenLocal.3 - Guardo imagen si la levantó localmente:
+                if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
                     File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
 
                 Close();
@@ -134,17 +136,20 @@ namespace winform_app
         //LevantarYGuardarImagenLocal.1
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
+            //crear objeto
             archivo = new OpenFileDialog();
-            //tipo de archivo
+            //filtro, tipo de archivo en la entrada de dialogo
             archivo.Filter = "jpg|*.jpg;|png|*.png";
+            //cuadro de dialogo
             if(archivo.ShowDialog() == DialogResult.OK)
             {
                 //nombre del archivo
                 txtUrlImagen.Text = archivo.FileName;
-                //carga de imagen
+                //cargar imagen
                 cargarImagen(archivo.FileName);
 
                 //guardo la imagen
+                //          archivo de origen,                       destino                    + nombre archivo
                 //File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
             }
 
