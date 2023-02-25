@@ -7,23 +7,21 @@ using System.Data.SqlClient;
 
 namespace negocio
 {
-    //Creaccion de clase para centralizar la conexión
+    //2.ClaseAccesoADatosCentralizado.1.Creaccion de clase para centralizar la conexión
     public class AccesoDatos
     {
-        //declarar variable conexión
+        //2.ClaseAccesoADatosCentralizado.2.Declarar variable conexión, comando y lector
         private SqlConnection conexion;
-        //declarar variable comando
         private SqlCommand comando;
-        //declarar variable lector
         private SqlDataReader lector;
 
-        //property para leer el lector desde el exterior
+        //2.ClaseAccesoADatosCentralizado.6.Property public para leer el lector desde el exterior
         public SqlDataReader Lector
         {
             get { return lector; }
         }
 
-        //crear constructor de conexión
+        //2.ClaseAccesoADatosCentralizado.3.Crear constructor de conexión
         public AccesoDatos()
         {
             //creación por parametro de constructor /cadena de conexión
@@ -32,14 +30,14 @@ namespace negocio
             comando = new SqlCommand();
         }
 
-        //función para setear consulta
+        //2.ClaseAccesoADatosCentralizado.4.Crear función para setear consulta
         public void setearConsulta(string consulta)
         {
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
 
-        //funcion para ejecutar lectura
+        //2.ClaseAccesoADatosCentralizado.5.Crear funcion para ejecutar lectura
         public void ejecutarLectura()
         {
             comando.Connection = conexion;
@@ -78,7 +76,7 @@ namespace negocio
             comando.Parameters.AddWithValue(nombre, valor);
         }
 
-        //funcion de cerrar conexion
+        //2.ClaseAccesoADatosCentralizado.7.Crear funcion de cerrar conexion
         public void cerrarConexion()
         {
             if (lector != null)

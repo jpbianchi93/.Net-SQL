@@ -10,16 +10,16 @@ namespace negocio
 {
     public class ElementoNegocio
     {
-        //Crear el elemento negocio
+        //2.ClaseAccesoADatosCentralizado.8.Crear el elemento negocio
         public List<Elemento> listar()
         {
             //lista que va a devolver
             List<Elemento>lista= new List<Elemento>();
-            //declarar acceso a datos
+            //2.ClaseAccesoADatosCentralizado.8.1.Declarar acceso a datos
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                //setear la consulta a realizar
+                //2.ClaseAccesoADatosCentralizado.8.2.Setear la consulta a realizar
                 datos.setearConsulta("select Id, Descripcion from ELEMENTOS");
                 datos.ejecutarLectura();
 
@@ -40,7 +40,7 @@ namespace negocio
 
                 throw ex;
             }
-            //cerrar conector
+            //2.ClaseAccesoADatosCentralizado.8.3.Cerrar conector
             finally
             {
                 datos.cerrarConexion();

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//Libreria para declarar objetos de conexión
+//1.LescturaDB.2.a.Libreria para declarar objetos de conexión
 using System.Data.SqlClient;
 
 namespace winform_app
 {
+    //1.LescturaDB.2.CrearConexionDB
     class PokemonNegocio
     {
         //Clase que permite crear los métodos de acceso a datos de pókemon
@@ -15,6 +16,7 @@ namespace winform_app
         public List<Pokemon> listar()
         {
             List<Pokemon> lista = new List<Pokemon>();
+            //1.LescturaDB.2.b.Conexion Comando Lector
             //Objeto de conexión
             SqlConnection conexion = new SqlConnection();
             //Objeto de acciones
@@ -24,6 +26,7 @@ namespace winform_app
 
             try
             {
+                //1.LescturaDB.2.c.Configurar cadena de conexion
                 //Cadena de conexión         servidor(local)       base de datos        cómo conectarse   
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 //Realizar acción      lectura
@@ -33,12 +36,11 @@ namespace winform_app
                 //Ejecutar comando en esta conexión
                 comando.Connection = conexion;
 
-                //Abre conexión
+                //1.LescturaDB.2.d.Abre conexión y Realiza lectura, ya esta el objeto en variable, todavia no hay selección
                 conexion.Open();
-                //Realiza lectura, ya esta el objeto en variable, todavia no hay selección
                 lector = comando.ExecuteReader();
 
-                //Leer el lector
+                //1.LescturaDB.2.d.Lee el lector en caso de que devuelva true
                 while (lector.Read())
                 {
                     //Crear pokemon auxiliar para cargar datos del registro
@@ -46,21 +48,20 @@ namespace winform_app
                     aux.Numero = lector.GetInt32(0); //GetInt32 == Int
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
-                    //Cargar datos de Imagen
+                    //2.ImagenDesdeDB.2.Cargar datos de Imagen
                     aux.UrlImagen = (string)lector["UrlImagen"];
-                    //Cargar datos de otra tabla. tirar esa linea de comando para que la referencia Tipo no de nula.
+                    //3.DatosRelacionadosDB.2.Cargar datos de tipo Elemento. tirar esa linea de comando para que la referencia Tipo no de nula.
                     aux.Tipo = new Elemento();
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
                     aux.Debilidad = new Elemento();
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
 
-                    //Agregas ese pokemon a la lista
+                    //Agrega ese pokemon a la lista
                     lista.Add(aux);
                 }
 
-                //Cerrar la conexión
+                //1.LescturaDB.2.e.Cierra la conexión y devuelve la lista
                 conexion.Close();
-                //Devuelve la lista
                 return lista;
             }
             catch (Exception ex)
