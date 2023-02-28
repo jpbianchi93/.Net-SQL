@@ -19,11 +19,13 @@ namespace winform_app
             InitializeComponent();
         }
 
+        //3.InsertSimple.1.1.CerrarVentana
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        //3.InsertSimple.2.Crear pokemon
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             //crear pokemon
@@ -37,10 +39,11 @@ namespace winform_app
                 pokeNuevo.Nombre = txtNombre.Text;
                 pokeNuevo.Descripcion = txtDescripcion.Text;
                 pokeNuevo.UrlImagen = txtUrlImagen.Text;
+                //4.AgregarDesplegables.2.Capturar valor del desplegable
                 pokeNuevo.Tipo = (Elemento)cboTipo.SelectedItem;
                 pokeNuevo.Debilidad = (Elemento)cboDebilidad.SelectedItem;
 
-                //Mandar pokemon a la base de datos
+                //3.InsertSimple.2.1.Mandar pokemon a la base de datos
                 negocio.Agregar(pokeNuevo);
                 MessageBox.Show("Pokemon agregado a la lista");
                 Close();
@@ -54,7 +57,7 @@ namespace winform_app
 
         private void frmAltaPokemon_Load(object sender, EventArgs e)
         {
-            //cargar comboBox
+            //4.AgregarDesplegables.1.Cargar comboBox
             ElementoNegocio elementoNegocio = new ElementoNegocio();
             try
             {
@@ -70,10 +73,11 @@ namespace winform_app
 
         private void txtUrlImagen_Leave(object sender, EventArgs e)
         {
+            //8.AgregarImagenAlAlta.1.1
             cargarImagen(txtUrlImagen.Text);
         }
-        
-        //Carga de imagen de alta con leave
+
+        //8.AgregarImagenAlAlta.1.Carga de imagen de alta con leave
         private void cargarImagen(string imagen)
         {
             try

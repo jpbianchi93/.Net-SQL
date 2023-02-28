@@ -53,7 +53,7 @@ namespace negocio
             }
         }
 
-        //crear metodo de ejecucion sin consulta
+        //3.InsertSimple.4.Crear metodo de ejecucion sin consulta
         public void ejecutarAccion()
         {
             comando.Connection = conexion;
@@ -69,7 +69,7 @@ namespace negocio
             }
         }
 
-        //método para setear parámetros
+        //5.InsertParámetrosDeComando.1.Método para setear parámetros
         public void setearParametro(string nombre, object valor)
         {
             //agregar parámetro con valor

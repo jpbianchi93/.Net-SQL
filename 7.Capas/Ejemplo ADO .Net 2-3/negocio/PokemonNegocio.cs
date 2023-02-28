@@ -34,7 +34,7 @@ namespace negocio
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
 
-                    //Validar lectura Null
+                    //6.ValidarValorNULL.1.Validar lectura Null
                     //método 1
                     //if(!(lector.IsDBNull(lector.GetOrdinal("UrlImagen"))))
                     //    aux.UrlImagen = (string)lector["UrlImagen"];
@@ -59,20 +59,20 @@ namespace negocio
             }
 
         }
-        //lógica para agregar a la base de datos
+        //3.InsertSimple.3.Crear lógica para agregar a la base de datos
         public void Agregar(Pokemon nuevo)
         {
             //Conectarme a DB
             AccesoDatos dato = new AccesoDatos();
             try
             {
-                //setear consulta
+                //3.InsertSimple.3.1.Setear consulta
                 dato.setearConsulta("insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad, UrlImagen) values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "', 1, @IdTipo, @IdDebilidad, @urlImagen)");
-                //setear consulta
+                //5.InsertParámetrosDeComando.2.Setear consulta
                 dato.setearParametro("@IdTipo", nuevo.Tipo.Id);
                 dato.setearParametro("@IdDebilidad", nuevo.Debilidad.Id);
                 dato.setearParametro("@urlImagen", nuevo.UrlImagen);
-                //ejecucion de tipo no consulta
+                //3.InsertSimple.4.1.Ejecucion de tipo no consulta
                 dato.ejecutarAccion();
             }
             catch (Exception ex)

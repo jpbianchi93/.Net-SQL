@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-//Annotations
+//7.DataGridView.2.1.Annotations
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace dominio
     //Hacer visible la clase para que la vea Winform-app (public)
     public class Pokemon
     {
-        //Annotatons
+        //7.DataGridView.2.Annotatons
         [DisplayName("Número")]
         public int Numero { get; set; }
         public string Nombre { get; set; }

@@ -26,7 +26,7 @@ namespace winform_app
             cargar();
         }
 
-        //metodo para cargar datos
+        //7.DataGridView.1.Método para cargar datos
         private void cargar()
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -63,9 +63,9 @@ namespace winform_app
             }
         }
 
+        //3.InsertSimple.1.Abrir frmAltaPokemon
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //abrir frmAltaPokemon
             frmAltaPokemon alta = new frmAltaPokemon();
             alta.ShowDialog(); //no te permite salir de la aplicación mientras se trabaja en una ventana
             //actualizar la carga
