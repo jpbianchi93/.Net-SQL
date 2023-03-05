@@ -17,16 +17,16 @@ namespace winform_app
 {
     public partial class frmAltaPokemon : Form
     {
-        //Modificar.3 - Aributo privado Pokemon = Null
+        //1.Modificar.2.1 - Aributo privado Pokemon = Null
         private Pokemon pokemon = null;
-        //LevantarYGuardarImagenLocal.2
+        //7.LevantarYGuardarImagenLocal.2
         private OpenFileDialog archivo = null;
 
         public frmAltaPokemon()
         {
             InitializeComponent();
         }
-        //Modificar.1 - Agrega parametro pokemon para modificarlo
+        //1.Modificar.2 - Agrega parametro pokemon para modificarlo
         public frmAltaPokemon(Pokemon pokemon)
         {
             InitializeComponent();
@@ -68,7 +68,7 @@ namespace winform_app
                     MessageBox.Show("Agregado exitosamente");
                 }
 
-                //LevantarYGuardarImagenLocal.3 - Guardo imagen si la levantó localmente:
+                //7.LevantarYGuardarImagenLocal.3 - Guardo imagen si la levantó localmente:
                 if (archivo != null && !(txtUrlImagen.Text.ToUpper().Contains("HTTP")))
                     File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
 
@@ -86,7 +86,7 @@ namespace winform_app
             ElementoNegocio elementoNegocio = new ElementoNegocio();
             try
             {
-                //Modificar.4.1 - Indicar el valor preseleccionado del comboBox
+                //1.Modificar.4.1 - Indicar el valor preseleccionado del comboBox
                 cboTipo.DataSource = elementoNegocio.listar();
                 //Valor clave, interno... propiedades de elementos
                 cboTipo.ValueMember = "Id";
@@ -96,7 +96,7 @@ namespace winform_app
                 cboDebilidad.ValueMember = "Id";
                 cboDebilidad.DisplayMember = "Descripcion";
 
-                //Modificar.4 - Precargar los datos del pokemon para modificar
+                //1.Modificar.4 - Precargar los datos del pokemon para modificar
                 if (pokemon != null)
                 {
                     txtNumero.Text = pokemon.Numero.ToString();
@@ -133,7 +133,7 @@ namespace winform_app
             }
         }
 
-        //LevantarYGuardarImagenLocal.1
+        //7.LevantarYGuardarImagenLocal.1
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
             //crear objeto
@@ -148,7 +148,7 @@ namespace winform_app
                 //cargar imagen
                 cargarImagen(archivo.FileName);
 
-                //guardo la imagen
+                //7.LevantarYGuardarImagenLocal.1.2.Guardo la imagen - Using System.Configuration
                 //          archivo de origen,                       destino                    + nombre archivo
                 //File.Copy(archivo.FileName, ConfigurationManager.AppSettings["images-folder"] + archivo.SafeFileName);
             }

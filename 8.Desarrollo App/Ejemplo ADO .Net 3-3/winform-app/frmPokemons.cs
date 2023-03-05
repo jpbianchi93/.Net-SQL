@@ -23,7 +23,7 @@ namespace winform_app
         private void frmPokemons_Load(object sender, EventArgs e)
         {
             cargar();
-            //FiltradoAvanzado.1 - enumera el campo
+            //6.FiltradoAvanzado.1 - Enumera el campo
             cboCampo.Items.Add("Número");
             cboCampo.Items.Add("Nombre");
             cboCampo.Items.Add("Descripción");
@@ -81,42 +81,45 @@ namespace winform_app
             cargar();
         }
 
-        //Modificar.2
+        //1.Modificar.1
         private void btnModificar_Click(object sender, EventArgs e)
         {
             //pasa al formulario por parámetro el objeto pokemon a modificar
             Pokemon seleccionado;
             seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
 
-            //Igual que Agregar, usa el mismo fuomulario
+            //Igual que Agregar, usa el mismo formulario
             frmAltaPokemon modificar = new frmAltaPokemon(seleccionado);
             modificar.ShowDialog();
             cargar();
         }
 
+        //2.EliminacionFisico
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
-            ////EliminarFisico.2 llamar metodo
+            ////2.eliminarfisico.2 llamar metodo
             //PokemonNegocio negocio = new PokemonNegocio();
             //Pokemon seleccionado;
-            ////EliminarFisico.2.1 cuadro de dialogo de advertencia
-            //DialogResult respuesta = MessageBox.Show("¿De verdad querés eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            ////2.eliminarfisico.2.1 cuadro de dialogo de advertencia
+            //DialogResult respuesta = MessageBox.Show("¿de verdad querés eliminarlo?", "eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             //if (respuesta == DialogResult.Yes)
             //{
             //    seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
             //    negocio.eliminar(seleccionado.Id);
             //}
             //cargar();
+            //2.Eliminacion Físico.2.1(Por variable)
             eliminar();
         }
 
+        //3.EliminacionLogico
         private void btnEliminarLogico_Click(object sender, EventArgs e)
         {
-            //EliminacionLogico.2
+            //3.EliminacionLogico.2
             eliminar(true);
         }
 
-        //Eliminación Fisico y Logico.2 Metodo de seleccion
+        //2.3.Eliminación Fisico y Logico.2 Metodo de seleccion
         private void eliminar(bool logico = false)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -189,7 +192,7 @@ namespace winform_app
             return true;
         }
 
-        //FiltradoAvanzado.3
+        //6.FiltradoAvanzado.3
         private void btnFiltro_Click(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -212,7 +215,7 @@ namespace winform_app
 
         }
 
-        //FiltroRapido.1
+        //4.FiltroRapido.1
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             List<Pokemon> listaFiltrada;
@@ -220,6 +223,7 @@ namespace winform_app
 
             if (filtro.Length >= 3)
             {
+                //                                  expression lambda -> foreach
                 listaFiltrada = listaPokemon.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
             }
             else
@@ -232,9 +236,9 @@ namespace winform_app
             ocultarColumnas();
         }
 
+        //6.FiltradoAvanzado.2 - valor de cbo
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //FiltradoAvanzado.2 valor de cbo
             //guardar elemento seleccionado
             string opcion = cboCampo.SelectedItem.ToString();
             if(opcion == "Número")

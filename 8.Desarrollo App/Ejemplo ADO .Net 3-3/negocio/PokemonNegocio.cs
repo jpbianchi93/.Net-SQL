@@ -22,7 +22,7 @@ namespace negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                //Modificar.5 - Agregar los Id de tipo y debilidad
+                //1.Modificar.5 - Agregar los Id de tipo y debilidad
                 //EliminarLogico.3 - Ocultar activo = 0
                 comando.CommandText = "Select Numero, Nombre, P.Descripcion, UrlImagen, E.Descripcion Tipo, D.Descripcion Debilidad, P.IdTipo, P.IdDebilidad, P.Id From POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad And P.Activo = 1";
                 comando.Connection = conexion;
@@ -44,11 +44,11 @@ namespace negocio
                         aux.UrlImagen = (string)lector["UrlImagen"];
 
                     aux.Tipo = new Elemento();
-                    //Modificar.5.1 - Agregar Id Tipo
+                    //1.Modificar.5.1 - Agregar Id Tipo
                     aux.Tipo.Id = (int)lector["IdTipo"];
                     aux.Tipo.Descripcion = (string)lector["Tipo"];
                     aux.Debilidad = new Elemento();
-                    //Modificar.5.2 - Agregar Id Debilidad
+                    //1.Modificar.5.2 - Agregar Id Debilidad
                     aux.Debilidad.Id = (int)lector["IdDebilidad"];
                     aux.Debilidad.Descripcion = (string)lector["Debilidad"];
 
@@ -87,7 +87,7 @@ namespace negocio
             }
         }
 
-        //Modificar.7
+        //1.Modificar.7
         public void modificar(Pokemon poke)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -114,7 +114,7 @@ namespace negocio
             }
         }
 
-        //FiltradoAvanzado.3.1
+        //6.FiltradoAvanzado.3.1
         public List<Pokemon> filtrar(string campo, string criterio, string filtro)
         {
             List<Pokemon> lista = new List<Pokemon>();
@@ -198,7 +198,7 @@ namespace negocio
             }
         }
 
-        //EliminarFisico.1 creacion de método
+        //2.EliminarFisico.1 creacion de método
         public void eliminar(int id)
         {
             try
@@ -215,7 +215,7 @@ namespace negocio
             }
         }
 
-        //EliminarLogico.1 creacion de metodo
+        //3.EliminarLogico.1 creacion de metodo
         public void eliminarLogico(int id)
         {
             try
