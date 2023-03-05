@@ -146,9 +146,9 @@ namespace winform_app
                 MessageBox.Show(ex.ToString());
             }
         }
-
-        //FiltradoAvanzado.3.2
-        //RequeridosYSoloNros.1 funcion de filtrado
+        
+        //6.FiltradoAvanzado.3.2
+        //8.RequeridosYSoloNros.1 funcion de filtrado
         private bool validarFiltro()
         {
             //campo está vacio
